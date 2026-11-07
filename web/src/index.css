@@ -1,0 +1,55 @@
+@import "tailwindcss";
+@import "maplibre-gl/dist/maplibre-gl.css";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --color-paper: #faf7f2;
+  --color-paper-2: #f3eee6;
+  --color-ink: #1c1917;
+  --color-ink-2: #57534e;
+  --color-ink-3: #a8a29e;
+  --color-line: #e7e0d6;
+  --color-flight: #0ea5e9;
+  --color-lodging: #8b5cf6;
+  --color-transfer: #f59e0b;
+  --color-restaurant: #f43f5e;
+  --color-activity: #10b981;
+  --color-meetup: #d946ef;
+  --color-note: #64748b;
+  --shadow-card: 0 1px 2px rgb(28 25 23 / 0.04), 0 8px 24px -12px rgb(28 25 23 / 0.18);
+  --shadow-pop: 0 12px 40px -12px rgb(28 25 23 / 0.35);
+}
+
+html, body, #root { height: 100%; }
+body { @apply bg-paper text-ink font-sans antialiased; }
+::selection { background: #fde68a; }
+
+.card { @apply bg-white rounded-2xl border border-line shadow-card; }
+.btn { @apply inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-medium transition-colors cursor-pointer select-none; }
+.btn-primary { @apply inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-medium transition-colors cursor-pointer select-none bg-ink text-white hover:bg-stone-700; }
+.btn-ghost { @apply inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-medium transition-colors cursor-pointer select-none hover:bg-paper-2 text-ink-2 hover:text-ink; }
+.btn-soft { @apply inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-medium transition-colors cursor-pointer select-none bg-paper-2 hover:bg-line text-ink; }
+.input { @apply w-full rounded-xl border border-line bg-white px-3 py-2 text-sm outline-none focus:border-ink/40 focus:ring-2 focus:ring-ink/10 placeholder:text-ink-3; }
+.label { @apply block text-[11px] font-semibold uppercase tracking-wider text-ink-3 mb-1; }
+.chip { @apply inline-flex items-center gap-1 rounded-full border border-line bg-white px-2 py-0.5 text-[11px] font-medium text-ink-2; }
+.mono { @apply font-mono text-[12px] tracking-wide; }
+.scrollbar-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: #e7e0d6; border-radius: 8px; }
+
+@keyframes pulse-ring { 0% { transform: scale(0.6); opacity: 0.9; } 100% { transform: scale(2.2); opacity: 0; } }
+.pulse-ring::after { content: ""; position: absolute; inset: 0; border-radius: 9999px; border: 2px solid currentColor; animation: pulse-ring 1.8s ease-out infinite; }
+@keyframes fade-up { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.fade-up { animation: fade-up .25s ease-out both; }
+
+.maplibregl-popup-content { @apply rounded-xl shadow-pop px-3 py-2 text-sm font-sans; }
+.maplibregl-ctrl-group { border-radius: 12px !important; box-shadow: var(--shadow-card) !important; border: 1px solid var(--color-line) !important; }
+.marker { cursor: pointer; }
+.marker-pin { width: 28px; height: 28px; border-radius: 9999px 9999px 9999px 2px; transform: rotate(-45deg); display: grid; place-items: center; border: 2px solid white; box-shadow: 0 2px 8px rgb(0 0 0 / .25); transition: transform .15s; }
+.marker-pin > span { transform: rotate(45deg); font-size: 13px; line-height: 1; }
+.marker:hover .marker-pin, .marker.active .marker-pin { transform: rotate(-45deg) scale(1.25); }
+.marker-home { width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; border: 2px solid white; box-shadow: 0 2px 8px rgb(0 0 0 / .25); font-size: 15px; }
+.marker-traveler { width: 34px; height: 34px; border-radius: 9999px; display: grid; place-items: center; color: white; font-weight: 700; font-size: 13px; border: 3px solid white; box-shadow: 0 2px 10px rgb(0 0 0 / .3); position: relative; }
+.marker-traveler.stale { opacity: .55; filter: grayscale(.4); }
+.marker-beacon { width: 36px; height: 36px; border-radius: 9999px; display: grid; place-items: center; position: relative; color: #d946ef; background: #fdf4ff; border: 2px solid #d946ef; font-size: 16px; }
